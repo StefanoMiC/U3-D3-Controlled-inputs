@@ -3,6 +3,7 @@ import { Component } from "react";
 import { Container, Row, Col, Carousel, ListGroup, Badge } from "react-bootstrap";
 
 import arrayOfPastas from "../data/menu.json"; /* this creates a variable that we can use: arrayOfPastas */
+import ReservationForm from "./ReservationForm";
 
 class Home extends Component {
   // the render() method is the ONLY MANDATORY part of a class based component
@@ -24,13 +25,15 @@ class Home extends Component {
       <Container fluid>
         <Row className="justify-content-md-center">
           <Col xs={12} md={6} className="mt-md-5">
+            <ReservationForm />
+          </Col>
+        </Row>
+        <Row className="justify-content-md-center">
+          <Col xs={12} md={6} className="mt-md-5">
             <Carousel>
               {/* The map method takes an array and returns a piece of JSX, REMEMBER to assign a unique key prop to the immediate element you are returning */}
               {arrayOfPastas.map((pasta, index) => (
-                <Carousel.Item
-                  key={`dish-${index}`}
-                  // className={this.state.selectedPasta && this.state.selectedPasta.id === pasta.id && "selectedState"}
-                >
+                <Carousel.Item key={`dish-${index}`} className={this.state.selectedPasta?.id === pasta.id && "selectedState"}>
                   <img
                     className="d-block w-100"
                     src={pasta.image}
@@ -48,11 +51,11 @@ class Home extends Component {
                       this.setState({ selectedPasta: pasta });
                     }}
                   />
-                  {/* {this.state.selectedPasta && this.state.selectedPasta.id === pasta.id && (
+                  {this.state.selectedPasta?.id === pasta.id && (
                     <Badge pill variant="success" style={{ position: "absolute", top: 10, right: 15 }}>
                       Selected
                     </Badge>
-                  )} */}
+                  )}
                   <Carousel.Caption>
                     <h3>{pasta.name}</h3>
                     <p>{pasta.description}</p>

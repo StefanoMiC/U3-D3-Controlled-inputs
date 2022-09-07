@@ -22,7 +22,7 @@
 
 // REACT FUNCTIONAL COMPONENT (no this keyword available)
 const Welcome = ({ text }) => {
-  console.log(this);
+  console.log(this); //undefined
   return (
     <>
       <p>Welcome! {text}</p>
